@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+    <h1>じゃんけん</h1>
+</header>
+
+<main>
+
+    <ul>
+        <li id="gu_btn" class="btn">グー</li>
+        <li id="cho_btn" class="btn">チョキ</li>
+        <li id="par_btn" class="btn">パー</li>
+    </ul>
+
+        <div><H1>コンピュータの出した手は？「<span id="pc_hands">コンピュータが何を出したか見せる必要がない場合（勝ち負けあいこが1/3の確率で出ることさえ分かればいい場合）modの方が短いプログラムで済む
+        </span>」</H1></div>
+        <div id="judgment"><h2>判定↓</h2></div>
+        <div><h1>勝ち負けの結果は？「<span id="syohai"></span>」</h1></div>
+        <div id="emotion"><img src="" alt=""></div>
+
+    <ul>
+        <h2><li id="winCount" class="counter">勝った回数: 0</li></h2>
+        <h2><li id="loseCount" class="counter">負けた回数: 0</li></h2>
+        <h2><li id="drawCount" class="counter">あいこの回数: 0</li></h2>
+    </ul>
+
+    <button id="reset_btn">リセット</button>
+
+</main>
+
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+// modによる勝敗の判定方法
+
+let winCount = 0;
+let loseCount = 0;
+let drawCount = 0;
+
+$("#gu_btn").on("click", function(){ i = 1; });
+$("#cho_btn").on("click", function(){ i = 2; });
+$("#par_btn").on("click", function(){ i = 3; });
+
+$(".btn").on("click", function(){
+    let y = Math.ceil(Math.random() * 3);
+    const t = (3 + i - y) % 3;
+
+    if (t == 2) {
+        winCount++;
+        $("#syohai").html("勝ちました");
+        $("#emotion").html('<img src="./img/happy.png">');
+    } else if (t == 1) {
+        loseCount++;
+        $("#syohai").html("負けました");
+        $("#emotion").html('<img src="./img/sad.png">');
+    } else {
+        drawCount++;
+        $("#syohai").html("あいこでした");
+        $("#emotion").html('<img src="./img/normal.png">');
+    }
+
+    $("#winCount").html("勝った回数: " + winCount);
+    $("#loseCount").html("負けた回数: " + loseCount);
+    $("#drawCount").html("あいこの回数: " + drawCount);
+});
+
+$("#reset_btn").on("click", function(){
+    winCount = 0;
+    loseCount = 0;
+    drawCount = 0;
+
+    $("#winCount").html("勝った回数: " + winCount);
+    $("#loseCount").html("負けた回数: " + loseCount);
+    $("#drawCount").html("あいこの回数: " + drawCount);
+    $("#syohai").html("リセットしました");
+});
+
+
+</script>
+</body>
+</html>
